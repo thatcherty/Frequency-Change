@@ -24,6 +24,17 @@ string HuffmanTree::decode()
     string orig = "";
     TreeNode* curr = root;
 
+    // special case for only one distinct character
+    if (!curr->getNext(1) && !curr->getNext(0))
+    {
+        for (char c : encoded)
+        {
+            orig += curr->getChar();
+        }
+
+        return orig;
+    }
+
     for (char c : encoded)
     {
         curr = curr->getNext(int(c)-48);
@@ -88,6 +99,13 @@ void HuffmanTree::modifyFreq(unordered_map<char, int>& modifFreq, string s)
 void HuffmanTree::getMapping()
 {
     if (!root) return;
+
+    // special case for only one distinct character
+    if (!root->getNext(1) && !root->getNext(0))
+    {
+        mapping[root->getChar()] = "0";
+        return;
+    }
 
     string path = "";
     stack<string> pathSoFar{};
