@@ -5,20 +5,24 @@ using namespace std;
 int main()
 {
 	string phrase_input = "";
-	char char_input;
+	string char_input;
 	int freq_input;
 	unordered_map<char, int> newFreq{};
 
 	cout << "Please enter a string to encode: " << endl;
 	getline(cin, phrase_input);
 
-	cout << "Enter a character and a new frequency (for example 'a 5'): " << endl;
-	cin >> char_input;
-	cin >> freq_input;
-
-	while (char_input != '\0')
+	while (true)
 	{
-		newFreq[char_input] = freq_input;
+		cout << "Enter a character and a new frequency (for example 'a 5') or type quit to quit: " << endl;
+		cin >> char_input;
+
+		if (char_input == "quit") break;
+
+		cin >> freq_input;
+
+		char temp = char_input[0];
+		newFreq[temp] = freq_input;
 	}
 
 	HuffmanTree example = HuffmanTree(phrase_input);
